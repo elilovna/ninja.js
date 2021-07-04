@@ -1,33 +1,26 @@
-import React from 'react'
+import React, { useCallback } from 'react';
+import clsx from 'clsx';
 
 const Page = (props) => {
-  const { pageNumber, currentPageNumber, onChange } = props
+  const { pageNumber, currentPageNumber, onChange } = props;
 
-  const isActivePage = () => {
-    return currentPageNumber == pageNumber
-  }
+  const click = useCallback(() => {
+    onChange(pageNumber);
+  }, [onChange, pageNumber]);
 
-  const renderedPageNumber = () => {
-    return pageNumber + 1
-  }
+  const highlight = currentPageNumber === pageNumber;
 
-  const click = (event) => {
-    event.preventDefault()
-    onChange(pageNumber)
-  }
-
-  if (isActivePage()) {
-    return(
-      <li className="page-item mr-1">
-        <button className="page-link button-outline" onClick={click} >{renderedPageNumber()}</button>
-      </li>
-    )
-  }
-  return(
+  return (
     <li className="page-item mr-1">
-      <button className="page-link" onClick={click} >{renderedPageNumber()}</button>
+      <button
+        type="button"
+        className={clsx('page-link', { 'button-outline': highlight })}
+        onClick={click}
+      >
+        {pageNumber + 1}
+      </button>
     </li>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
