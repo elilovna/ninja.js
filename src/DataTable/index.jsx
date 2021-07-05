@@ -35,7 +35,7 @@ const DataTable = ({ rows: initialRows, rowsPerPage = 40 }) => {
         currentPageNumber={currentPageNumber}
         rows={rows}
       />
-      {totalNumberOfPages > 0 && (
+      {totalNumberOfPages > 1 && (
         <Pagination
           currentPageNumber={currentPageNumber}
           totalNumberOfPages={totalNumberOfPages}
